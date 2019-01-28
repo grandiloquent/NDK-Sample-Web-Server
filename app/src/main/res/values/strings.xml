@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Server</string>
+    <string name="dialog_request_permission_title"></string>
+    <string name="dialog_request_permission_content">%s</string>
+
 </resources>

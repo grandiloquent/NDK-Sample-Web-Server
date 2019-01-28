@@ -10,7 +10,8 @@ android {
         versionName "1.0"
         externalNativeBuild {
             cmake {
-                cppFlags "-std=c++11 -frtti -fexceptions"
+                arguments '-DANDROID_TOOLCHAIN=clang'
+                // cppFlags "-std=c++11 -frtti -fexceptions"
             }
         }
     }
@@ -28,6 +29,6 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'lFailed to create directory \'C:\\Codes\\Android\\Server\\app\\.externalNativeBuild\\cmake\\debug\\arm64-v8aibs', include: ['*.jar'])
 
 }

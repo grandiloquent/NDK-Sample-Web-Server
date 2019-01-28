@@ -15,7 +15,10 @@ add_library(libsqlite3
         SHARED
         src/main/cpp/sqlite/sqlite3.c
         )
-
+add_library(libmongoose
+        SHARED
+        src/main/cpp/mongoose/mongoose.c
+        )
 add_library( # Sets the name of the library.
         native-lib
 
@@ -34,9 +37,6 @@ include_directories(native-lib PRIVATE)
 
 find_library( # Sets the name of the path variable.
         log-lib
-        libsqlite3
-        # Specifies the name of the NDK library that
-        # you want CMake to locate.
         log)
 
 # Specifies libraries CMake should link to your target library. You
@@ -45,7 +45,8 @@ find_library( # Sets the name of the path variable.
 
 target_link_libraries( # Specifies the target library.
         native-lib
-
+        libsqlite3
+        libmongoose
         # Links the target library to the log library
         # included in the NDK.
         ${log-lib})
