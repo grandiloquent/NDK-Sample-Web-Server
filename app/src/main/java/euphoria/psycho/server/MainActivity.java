@@ -21,7 +21,9 @@ import java.io.InputStream;
 public class MainActivity extends Activity {
 
 
+    public static final boolean DEBUG = true;
     public static final int PERMISSION_REQUEST_CODE = 1;
+    private static final String TAG = "TAG/" + MainActivity.class.getSimpleName();
 
     static {
         System.loadLibrary("native-lib");
@@ -49,8 +51,6 @@ public class MainActivity extends Activity {
         }
     }
 
-    private static final String TAG = "TAG/" + MainActivity.class.getSimpleName();
-
     public File getAssetDirectory() {
 
         return new File(Environment.getExternalStorageDirectory(), "www");
@@ -62,8 +62,6 @@ public class MainActivity extends Activity {
             Log.d(TAG, "initialize: " + Utilities.getDeviceIP(this));
         }
     }
-
-    public static final boolean DEBUG = true;
 
     private static void copyFile(InputStream inputStream, File targetFile) {
 
@@ -79,7 +77,7 @@ public class MainActivity extends Activity {
 
     }
 
-    public static native int startServer(String host, int port, String staticDirectory);
+    public static native int startServer(String host, int port, String staticDirectory,String databasePath);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
