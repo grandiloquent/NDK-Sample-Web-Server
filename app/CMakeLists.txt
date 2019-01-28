@@ -5,10 +5,10 @@
 
 cmake_minimum_required(VERSION 3.4.1)
 
-# Creates and names a library, sets it as either STATIC
-# or SHARED, and provides the relative paths to its source code.
-# You can define multiple libraries, and CMake builds them for you.
-# Gradle automatically packages shared libraries with your APK.
+add_library(libsqlite3
+        SHARED
+        src/main/cpp/sqlite/sqlite3.c
+        )
 
 add_library( # Sets the name of the library.
         native-lib
@@ -17,9 +17,13 @@ add_library( # Sets the name of the library.
         SHARED
 
         # Provides a relative path to your source file(s).
-        src/main/cpp/native-lib.c
         src/main/cpp/buffer.c
+        src/main/cpp/connection.c
+        src/main/cpp/lotos_epoll.c
+        src/main/cpp/mem_pool.c
         src/main/cpp/misc.c
+        src/main/cpp/native-lib.c
+        src/main/cpp/server.c
         )
 
 # Searches for a specified prebuilt library and stores the path as a
@@ -32,7 +36,7 @@ include_directories(native-lib PRIVATE)
 
 find_library( # Sets the name of the path variable.
         log-lib
-
+        libsqlite3
         # Specifies the name of the NDK library that
         # you want CMake to locate.
         log)
