@@ -1,0 +1,112 @@
+.article:before {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    content: "";
+    background-color: #fff;
+    -webkit-transition: opacity 1s;
+    transition: opacity 1s;
+}
+
+.article:after {
+    display: block;
+    clear: both;
+    height: 0;
+    content: "";
+}
+
+.article h1 {
+    margin-bottom: 24px;
+    letter-spacing: -1px;
+    color: #161616;
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 60px;
+}
+
+.article h2 {
+    margin-top: 60px;
+    margin-bottom: 20px;
+    letter-spacing: -.5px;
+    color: #161616;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.article ol,
+.article ul,
+.list {
+    margin-bottom: 20px;
+    padding: 0 0 0 21px;
+}
+
+.article ol:last-child,
+.article ul:last-child,
+.list:last-child {
+    margin-bottom: 0;
+}
+
+.article li,
+.list__item {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.article li:before,
+.list__item:before {
+    position: absolute;
+    top: 0;
+    right: 100%;
+    height: 1.6em;
+    margin: auto 12px auto 0;
+    content: "\2013";
+    text-align: right;
+    color: #999;
+    line-height: 1.6em;
+}
+
+.article .note p,
+.article .tip p,
+.article .todo p,
+.article .warning p,
+.article dd p,
+.article li p,
+.article table p {
+    margin-bottom: 10px;
+}
+
+.article p {
+    margin-bottom: 20px;
+}
+
+.article p:last-child {
+    margin-bottom: 0;
+}
+
+.article a {
+    cursor: pointer;
+    text-decoration: underline;
+    color: #008eff;
+    -webkit-transition: color .2s;
+    transition: color .2s;
+}
+
+.article a:visited {
+    color: #902e97;
+}
+
+.article img {
+    max-width: 100%;
+    height: auto;
+}
+
+.article figure img {
+    vertical-align: top;
+}
+
+ 

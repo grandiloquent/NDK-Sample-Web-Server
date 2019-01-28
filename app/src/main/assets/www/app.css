@@ -180,6 +180,78 @@
     }
 }
 
+.nav {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 100%;
+    -webkit-box-shadow: inset -1px 0 0 0 #e6e6e6;
+    box-shadow: inset -1px 0 0 0 #e6e6e6;
+}
+
+.nav__toc {
+    -webkit-animation: fade-in .3s ease-out forwards;
+    animation: fade-in .3s ease-out forwards;
+    /* opacity: 0; */
+    overflow-y: auto;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    padding: 30px 0 10px;
+    will-change: transform;
+    -webkit-overflow-scrolling: touch;
+}
+
+.toc-tree {
+    list-style: none;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 17px;
+}
+
+.toc-tree__title-wrapper {
+    position: relative;
+}
+
+.toc-tree__title {
+    padding-top: 6px;
+    padding-right: 5px;
+    padding-bottom: 6px;
+    outline: none;
+    cursor: default;
+    color: #343434;
+    font-size: 14px;
+    line-height: 19.25px;
+}
+
+.toc-tree__title--link,
+.toc-tree__title--link:visited {
+    display: block;
+    cursor: pointer;
+    text-decoration: none;
+    color: #343434;
+}
+
+.toc-tree__node--level_0 .toc-tree__title {
+    padding-left: 26px;
+}
+
+.toc-tree__title--link:hover,
+.toc-tree__title--link:visited:hover {
+    color: #343434;
+}
+
+.toc-tree__title-wrapper:hover .toc-tree__title:not(.toc-tree__title--selected),
+.toc-tree__title-wrapper:hover .toc-tree__title:visited:not(.toc-tree__title--selected) {
+    text-decoration: underline;
+}
+
 .app__toolbar {
     position: relative;
     opacity: .6;
@@ -202,9 +274,11 @@
     content: ' ';
     height: 1px;
 }
+
 .app__toolbar:after {
     margin-top: 8px;
 }
+
 .app__toolbar:before {
     margin-bottom: 8px;
 }
@@ -221,14 +295,17 @@
     border-radius: 3px;
     cursor: pointer;
 }
+
 .app__toolbar a:before {
     line-height: 30px;
 }
+
 .app__toolbar a.active,
 .app__toolbar a:hover {
     background: #fcfcfc;
     border-color: #95a5a6;
 }
+
 .app__toolbar i.separator {
     display: inline-block;
     width: 0;
@@ -238,12 +315,25 @@
     text-indent: -10px;
     margin: 0 6px;
 }
+
 /* ======= CodeMirror ========= */
 .app__main .app__container {
     height: 100%;
 
 }
-
+.app__content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 0 auto;
+    flex: 1 0 auto;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding: 20px 25px 20px 80px;
+}
 .breakpoints {
     width: .8em;
 }

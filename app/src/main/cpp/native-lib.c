@@ -2,6 +2,7 @@
 #include "Utilities.h"
 #include "mongoose/mongoose.h"
 #include "strbuf.h"
+#include "defines.h"
 
 static sqlite3 *s_db;
 static struct mg_serve_http_opts s_http_server_opts;
