@@ -3,7 +3,13 @@
 
 # Sets the minimum version of CMake required to build the native library.
 
+# C:\Users\psycho\AppData\Local\Android\Sdk\cmake\3.6.4111459\bin\cmake.exe
+
 cmake_minimum_required(VERSION 3.4.1)
+
+file(GLOB SOURCES "src/main/cpp/*.c")
+
+message("${SOURCES}")
 
 add_library(libsqlite3
         SHARED
@@ -16,21 +22,7 @@ add_library( # Sets the name of the library.
         # Sets the library as a shared library.
         SHARED
 
-        # Provides a relative path to your source file(s).
-        C:/Codes/Android/Server/app/src/main/cpp/buffer.c
-        C:/Codes/Android/Server/app/src/main/cpp/connection.c
-        C:/Codes/Android/Server/app/src/main/cpp/dict.c
-        C:/Codes/Android/Server/app/src/main/cpp/http_parser.c
-        C:/Codes/Android/Server/app/src/main/cpp/log.c
-        C:/Codes/Android/Server/app/src/main/cpp/lotos_epoll.c
-        C:/Codes/Android/Server/app/src/main/cpp/mem_pool.c
-        C:/Codes/Android/Server/app/src/main/cpp/misc.c
-        C:/Codes/Android/Server/app/src/main/cpp/native-lib.c
-        C:/Codes/Android/Server/app/src/main/cpp/request.c
-        C:/Codes/Android/Server/app/src/main/cpp/response.c
-        C:/Codes/Android/Server/app/src/main/cpp/server.c
-        C:/Codes/Android/Server/app/src/main/cpp/ssstr.c
-        )
+        ${SOURCES})
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by

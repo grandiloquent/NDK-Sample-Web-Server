@@ -1,10 +1,8 @@
 #ifndef _RESPONSE_H__
 #define _RESPONSE_H__
-
 #include "buffer.h"
 #include "connection.h"
 #include "request.h"
-
 #define SERVER_NAME "lotos/0.1"
 #define HTTP_STATUS_MAP(XX)                                                    \
   XX(100, CONTINUE, Continue)                                                  \
@@ -66,19 +64,14 @@
   XX(508, LOOP_DETECTED, Loop Detected)                                        \
   XX(510, NOT_EXTENDED, Not Extended)                                          \
   XX(511, NETWORK_AUTHENTICATION_REQUIRED, Network Authentication Required)
-
 typedef enum {
-#define XX(num, name, string) HTTP_STATUS_##name=num,
+#define XX(num, name, string) HTTP_STATUS_##name = num,
     HTTP_STATUS_MAP(XX)
 #undef XX
 } http_status;
-
 extern void mime_dict_init();
-
 extern void mime_dict_free();
-
 extern void status_table_init();
-
 typedef struct {
     int err_page_fd;
     const char *raw_err_page;
@@ -86,15 +79,14 @@ typedef struct {
     buffer_t *rendered_err_page;
     size_t rendered_page_size;
 } err_page_t;
-
 extern int err_page_init();
-
 extern void err_page_free();
-
 extern char *err_page_render_buf();
-
 extern void response_append_status_line(struct request *r);
-
 extern void response_append_date(struct request *r);
-
+extern void response_append_server(struct request *r);
+extern void response_append_content_type(struct request *r);
+extern void response_append_content_length(struct request *r);
+extern void response_append_connection(struct request *r);
+extern void response_append_crlf(struct request *r);
 #endif
