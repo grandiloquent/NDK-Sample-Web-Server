@@ -19,6 +19,7 @@ add_library( # Sets the name of the library.
         # Provides a relative path to your source file(s).
         C:/Codes/Android/Server/app/src/main/cpp/buffer.c
         C:/Codes/Android/Server/app/src/main/cpp/connection.c
+        C:/Codes/Android/Server/app/src/main/cpp/dict.c
         C:/Codes/Android/Server/app/src/main/cpp/http_parser.c
         C:/Codes/Android/Server/app/src/main/cpp/log.c
         C:/Codes/Android/Server/app/src/main/cpp/lotos_epoll.c
