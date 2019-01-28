@@ -3,7 +3,11 @@ package euphoria.psycho.server;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
@@ -11,6 +15,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.io.File;
@@ -21,12 +27,22 @@ import java.io.InputStream;
 public class MainActivity extends Activity {
 
 
+    public static final String ACTION_RUNNING = MainActivity.class.getCanonicalName() + ".ACTION_RUNNING";
     public static final boolean DEBUG = true;
+    public static final String DIRECTORY_STATIC = "www";
+    public static final String EXTRA_URL = "url";
+    public static final String FILENAME_DATABASE = "notes_notepad.db";
     public static final int PERMISSION_REQUEST_CODE = 1;
+    public static final Receiver mReceiver = new Receiver();
     private static final String TAG = "TAG/" + MainActivity.class.getSimpleName();
 
     static {
         System.loadLibrary("native-lib");
+    }
+
+    private void actionStratServer() {
+        Intent intent = new Intent(this, ServerService.class);
+        startService(intent);
     }
 
     private void copyAssets() {
@@ -77,7 +93,7 @@ public class MainActivity extends Activity {
 
     }
 
-    public static native int startServer(String host, int port, String staticDirectory,String databasePath);
+    public static native int startServer(String host, int port, String staticDirectory, String databasePath);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,10 +102,27 @@ public class MainActivity extends Activity {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(new String[]{
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.INTERNET
             }, PERMISSION_REQUEST_CODE);
         } else initialize();
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_options, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_server:
+                actionStratServer();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -115,5 +148,29 @@ public class MainActivity extends Activity {
             }
         }
         initialize();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(ACTION_RUNNING);
+        registerReceiver(mReceiver, filter);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(mReceiver);
+    }
+
+    private static class Receiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (DEBUG) {
+                Log.d(TAG, "onReceive: ");
+            }
+        }
     }
 }

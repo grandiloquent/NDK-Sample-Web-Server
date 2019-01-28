@@ -1,8 +1,12 @@
 package euphoria.psycho.server;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Build;
+import android.os.Environment;
 import android.util.Log;
 
 import java.io.Closeable;
@@ -17,6 +21,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 public class Utilities {
+    public static final String EXTRA_URL = "url";
     public static final long MB_IN_BYTES = 1048576;
     private static final String TAG = "TAG/" + Utilities.class.getSimpleName();
 
@@ -45,6 +50,20 @@ public class Utilities {
         if (!dir.isDirectory()) dir.mkdirs();
     }
 
+    public static NotificationChannel createNotificationChannel(Context context, String id, CharSequence name) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+            NotificationChannel channel = new NotificationChannel(
+                    id,
+                    name,
+                    NotificationManager.IMPORTANCE_LOW);
+            ((NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE))
+                    .createNotificationChannel(channel);
+            return channel;
+        }
+        return null;
+    }
+
     public static String getDeviceIP(Context context) {
         WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         try {
@@ -58,6 +77,10 @@ public class Utilities {
             Log.e(TAG, "[getDeviceIP] ---> ", e);
             return null;
         }
+    }
+
+    public static File getExternalFile(String fileName) {
+        return new File(Environment.getExternalStorageDirectory(), fileName);
     }
 
     public static InetAddress intToInetAddress(int hostAddress) {
