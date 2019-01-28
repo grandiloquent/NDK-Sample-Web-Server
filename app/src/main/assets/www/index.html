@@ -2,70 +2,56 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="reset.css">
-    <link rel="stylesheet" href="app.css">
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.43.0/codemirror.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
-          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
-          crossorigin="anonymous">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Document</title>
+   <link rel="stylesheet" href="reset.css">
+   <link rel="stylesheet" href="app.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.43.0/codemirror.min.css">
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+      crossorigin="anonymous">
 </head>
 
 <body>
-<div class="layout">
-    <header class="header">
-        <div class="layout__container header__container">
+   <div class="layout">
+      <header class="header">
+         <div class="layout__container header__container">
             <div class="group group--align-left header__title">
-                <div class="group__item group__item--no-margin">Note</div>
+               <div class="group__item group__item--no-margin">Note</div>
             </div>
-        </div>
-    </header>
-    <div class="app">
-        <div class="app__nav"></div>
-        <div class="app__main">
+         </div>
+      </header>
+      <div class="app">
+         <div class="app__nav"></div>
+         <div class="app__main">
 
             <div class="app__container">
 
-                <div class="app__toolbar"><a title="Bold (Ctrl-B)" tabindex="-1"
-                                             class="fa fa-bold"></a>
-                    <a title="Italic (Ctrl-I)"
-                       tabindex="-1"
-                       class="fa fa-italic"></a>
-                    <a title="Heading (Ctrl-H)" tabindex="-1" class="fa fa-heading"></a>
-                    <i class="separator">|</i>
-                    <a title="Quote (Ctrl-')" tabindex="-1"
-                       class="fa fa-quote-left"></a>
-                    <a title="Generic List (Ctrl-L)" tabindex="-1"
-                       class="fa fa-list-ul active active"></a>
-                    <a title="Numbered List (Ctrl-Alt-L)" tabindex="-1"
-                       class="fa fa-list-ol"></a>
-                    <i class="separator">|</i>
-                    <a title="Create Link (Ctrl-K)" tabindex="-1"
-                       class="fa fa-link active"></a>
-                    <a title="Insert Image (Ctrl-Alt-I)"
-                       tabindex="-1"
-                       class="fa fa-image"></a>
-                    <i class="separator">|</i>
-                    <a title="Toggle Preview (Ctrl-P)"
-                       tabindex="-1"
-                       class="fa fa-eye no-disable"></a>
-                    <a title="Toggle Side by Side (F9)" tabindex="-1"
-                       class="fa fa-columns no-disable no-mobile"></a>
-                    <a title="Toggle Fullscreen (F11)" tabindex="-1"
-                       class="fa fa-arrows-alt no-disable no-mobile"></a>
-                </div>
-                <textarea id="editor"></textarea>
+               <div class="app__toolbar">
+                  <a title="Bold (Ctrl-B)" tabindex="-1" class="fa fa-bold" id="bold"></a>
+                  <a title="Italic (Ctrl-I)" tabindex="-1" class="fa fa-italic"></a>
+                  <a title="Heading (Ctrl-H)" tabindex="-1" class="fa fa-heading" id="heading"></a>
+                  <i class="separator">|</i>
+                  <a title="Quote (Ctrl-')" tabindex="-1" class="fa fa-quote-left"></a>
+                  <a title="Generic List (Ctrl-L)" tabindex="-1" class="fa fa-list-ul"></a>
+                  <a title="Numbered List (Ctrl-Alt-L)" tabindex="-1" class="fa fa-list-ol"></a>
+                  <i class="separator">|</i>
+                  <a title="Create Link (Ctrl-K)" tabindex="-1" class="fa fa-link active"></a>
+                  <a title="Insert Image (Ctrl-Alt-I)" tabindex="-1" class="fa fa-image"></a>
+                  <i class="separator">|</i>
+                  <a title="Toggle Preview (Ctrl-P)" tabindex="-1" class="fa fa-eye no-disable"></a>
+                  <a title="Toggle Side by Side (F9)" tabindex="-1" class="fa fa-columns no-disable no-mobile"></a>
+                  <a title="Toggle Fullscreen (F11)" tabindex="-1" class="fa fa-arrows-alt no-disable no-mobile"></a>
+               </div>
+               <textarea id="editor"></textarea>
 
             </div>
-        </div>
-    </div>
-</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.43.0/codemirror.min.js"></script>
-<script src="app.js"></script>
+         </div>
+      </div>
+   </div>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.43.0/codemirror.min.js"></script>
+   <script src="app.js"></script>
 </body>
 
 </html>

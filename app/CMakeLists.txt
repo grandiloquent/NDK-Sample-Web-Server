@@ -19,6 +19,10 @@ add_library(libmongoose
         SHARED
         src/main/cpp/mongoose/mongoose.c
         )
+add_library(libjson
+        SHARED
+        src/main/cpp/json/cJSON.c
+        )
 add_library( # Sets the name of the library.
         native-lib
 
@@ -47,6 +51,7 @@ target_link_libraries( # Specifies the target library.
         native-lib
         libsqlite3
         libmongoose
+        libjson
         # Links the target library to the log library
         # included in the NDK.
         ${log-lib})
