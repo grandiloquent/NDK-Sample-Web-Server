@@ -17,13 +17,18 @@ add_library( # Sets the name of the library.
         SHARED
 
         # Provides a relative path to your source file(s).
-        src/main/cpp/buffer.c
-        src/main/cpp/connection.c
-        src/main/cpp/lotos_epoll.c
-        src/main/cpp/mem_pool.c
-        src/main/cpp/misc.c
-        src/main/cpp/native-lib.c
-        src/main/cpp/server.c
+        C:/Codes/Android/Server/app/src/main/cpp/buffer.c
+        C:/Codes/Android/Server/app/src/main/cpp/connection.c
+        C:/Codes/Android/Server/app/src/main/cpp/http_parser.c
+        C:/Codes/Android/Server/app/src/main/cpp/log.c
+        C:/Codes/Android/Server/app/src/main/cpp/lotos_epoll.c
+        C:/Codes/Android/Server/app/src/main/cpp/mem_pool.c
+        C:/Codes/Android/Server/app/src/main/cpp/misc.c
+        C:/Codes/Android/Server/app/src/main/cpp/native-lib.c
+        C:/Codes/Android/Server/app/src/main/cpp/request.c
+        C:/Codes/Android/Server/app/src/main/cpp/response.c
+        C:/Codes/Android/Server/app/src/main/cpp/server.c
+        C:/Codes/Android/Server/app/src/main/cpp/ssstr.c
         )
 
 # Searches for a specified prebuilt library and stores the path as a
