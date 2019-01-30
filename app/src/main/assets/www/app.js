@@ -23,9 +23,31 @@ var Formatter = {
   bold: function(cm) {
     var {start, end} = Formatter.position(cm);
     if (start.line != end.line) return;
+    var select = cm.getLine(start.line).substr(start.ch, end.ch - start.ch);
 
-    var text = `**${cm.getLine(i)}**`;
+    var text = ` **${select}** `;
     cm.replaceRange(text, start, end);
+  },
+  code: function(cm) {
+    var {start, end} = Formatter.position(cm);
+    if (start.line != end.line) {
+      var str = [];
+      for (var i = start.line;  i < end.line+1;i++) {
+        str.push(cm.getLine(i));
+      }
+      cm.replaceRange(`\`\`\`\n${str.join('\n')}\n\`\`\`\n`,{
+        line:start.line,
+        ch:0
+      },{
+        line:end.line,
+        ch:cm.getLine(end.line).length
+      })
+    } else {
+      var select = cm.getLine(start.line).substr(start.ch, end.ch - start.ch);
+
+      var text = ` \`${select}\` `;
+      cm.replaceRange(text, start, end);
+    }
   }
 };
 
@@ -94,15 +116,18 @@ App.prototype.bindElements = function() {
   this.title = document.getElementById('title');
   this.editor = document.getElementById('editor');
   this.article = document.querySelector('.article');
-  this.cm = CodeMirror.fromTextArea(
-      this.editor,
-      {lineNumbers: true, gutters: ['CodeMirror-linenumbers', 'breakpoints']});
+  this.cm = CodeMirror.fromTextArea(this.editor, {
+    lineNumbers: true,
+    lineWrapping: true,
+    gutters: ['CodeMirror-linenumbers', 'breakpoints']
+  });
   this.CodeMirror = document.querySelector('.CodeMirror');
 };
 App.prototype.setupElements = function() {
   if (this.cm) {
     this.cm.addKeyMap({
       'F1': this.onUpdate.bind(this),
+      'F2': this.code,
       'Ctrl-H': this.heading,
       'Ctrl-P': this.preview,
       'Esc': () => {
@@ -140,6 +165,9 @@ App.prototype.bindEvents = function() {
   }.bind(this);
   this.bold = function() {
     Formatter.bold(this.cm);
+  }.bind(this);
+  this.code = function() {
+    Formatter.code(this.cm);
   }.bind(this);
   this.preview = function() {
     if (this.CodeMirror.classList.contains('hide')) {

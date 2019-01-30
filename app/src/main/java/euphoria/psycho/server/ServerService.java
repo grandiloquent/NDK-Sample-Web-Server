@@ -11,7 +11,7 @@ import android.os.PowerManager;
 public class ServerService extends Service {
     public static final String CHANNEL_ID = "default";
     public static final String CHANNEL_NAME = "Web Server";
-    public static final int ID = 0;
+    public static final int ID = 100;
     private PowerManager.WakeLock mWakeLock;
 
     private Notification showPriorityNotification() {
@@ -24,6 +24,9 @@ public class ServerService extends Service {
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            builder.setSmallIcon(android.R.drawable.stat_sys_download)
+                    .setContentTitle("Server")
+                    .setContentText("Running the Server");
             return builder.build();
         } else {
             return new Notification();

@@ -23,6 +23,13 @@ add_library(libjson
         SHARED
         src/main/cpp/json/cJSON.c
         )
+add_library(libqrcode
+        SHARED
+        src/main/cpp/qrcode/qr.c
+        src/main/cpp/qrcode/qrcnv.c
+        src/main/cpp/qrcode/qrcnv_png.c
+        src/main/cpp/qrcode/qrcnv_svg.c
+        )
 add_library( # Sets the name of the library.
         native-lib
 

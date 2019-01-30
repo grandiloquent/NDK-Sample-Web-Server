@@ -156,6 +156,7 @@ public class MainActivity extends Activity {
         IntentFilter filter = new IntentFilter();
         filter.addAction(ACTION_RUNNING);
         registerReceiver(mReceiver, filter);
+        actionStratServer();
     }
 
     @Override
