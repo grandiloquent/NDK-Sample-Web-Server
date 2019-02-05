@@ -1,5 +1,38 @@
 (function() {
+function replaceLine(cm, text, lineNumber, lineLength) {
+  cm.replaceRange(
+      text, {line: lineNumber, ch: 0}, {line: lineNumber, ch: lineLength});
+}
+// string callback(string)
+function replaceInLine(cm, callback) {
+  var start = cm.getCursor('start');
+  var end = cm.getCursor('end');
+  // prevent change multiline
+  if (start.line != end.line) return;
+  var select = cm.getLine(start.line).substr(start.ch, end.ch - start.ch);
+
+  var text = callback(select);
+  cm.replaceRange(text, start, end);
+}
+function list(cm) {
+  var {start, end} = Formatter.position(cm);
+  var len = 0;
+  for (var i = start.line; i < end.line + 1; i++) {
+    var text = cm.getLine(i);
+    len = text.length;
+
+    if (text.charAt(0) == '*' && text.charAt(1) == ' ') {
+      text = text.substring(2);
+      console.log(text);
+    } else {
+      text = '* ' + text;
+    }
+    replaceLine(cm, text, i, len);
+  }
+  cm.setSelection({line: start.line, ch: 0}, {line: end.line, ch: len})
+}
 var Formatter = {
+  list: list,
   position: function(cm) {
     return {
       start: cm.getCursor('start'), end: cm.getCursor('end')
@@ -21,27 +54,25 @@ var Formatter = {
     cm.setSelection({line: start.line, ch: 0}, {line: end.line, ch: len})
   },
   bold: function(cm) {
-    var {start, end} = Formatter.position(cm);
-    if (start.line != end.line) return;
-    var select = cm.getLine(start.line).substr(start.ch, end.ch - start.ch);
-
-    var text = ` **${select}** `;
-    cm.replaceRange(text, start, end);
+    replaceInLine(cm, function(selected) {
+      return ` **${selected}** `;
+    })
+  },
+  link: function(cm) {
+    replaceInLine(cm, function(selected) {
+      return ` [${selected}]() `;
+    })
   },
   code: function(cm) {
     var {start, end} = Formatter.position(cm);
     if (start.line != end.line) {
       var str = [];
-      for (var i = start.line;  i < end.line+1;i++) {
+      for (var i = start.line; i < end.line + 1; i++) {
         str.push(cm.getLine(i));
       }
-      cm.replaceRange(`\`\`\`\n${str.join('\n')}\n\`\`\`\n`,{
-        line:start.line,
-        ch:0
-      },{
-        line:end.line,
-        ch:cm.getLine(end.line).length
-      })
+      cm.replaceRange(
+          `\`\`\`\n${str.join('\n')}\n\`\`\`\n`, {line: start.line, ch: 0},
+          {line: end.line, ch: cm.getLine(end.line).length})
     } else {
       var select = cm.getLine(start.line).substr(start.ch, end.ch - start.ch);
 
@@ -178,6 +209,14 @@ App.prototype.bindEvents = function() {
       this.CodeMirror.classList.add('hide');
     }
   }.bind(this);
+  this.list = function() {
+    Formatter.list(this.cm);
+  }.bind(this);
+  this.link=function(){
+    Formatter.link(this.cm);
+  }.bind(this);
+  onClick('link',this.link);
+  onClick('list', this.list);
   onClick('heading', this.heading);
   onClick('bold', this.bold);
   onClick('preview', this.preview);
